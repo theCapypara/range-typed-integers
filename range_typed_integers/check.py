@@ -137,8 +137,8 @@ def get_range(typ: Any) -> Optional[ValueRange]:
         except StopIteration:
             return None
 
-    if isinstance(typ, NewType):  # type: ignore
-        typ = typ.__supertype__  # type: ignore
+    if hasattr(typ, '__supertype__'):
+        typ = typ.__supertype__
 
     if hasattr(typ, '__metadata__') and hasattr(typ, '__origin__'):
         if not issubclass(typ.__origin__, (int,)):
