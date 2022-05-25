@@ -65,3 +65,10 @@ You can use the function ``check_int`` to check if an integer fits into any inte
 
 For ease-of-use the types shipped with this package, also have "checked constructors" (eg. ``u8_checked``),
 that will cast a value to their type and raise an ``IntegerBoundError`` if the value is out of range.
+
+MyPy and Python Support
+-----------------------
+This is only truly supported in Python 3.9+, due to the lack of the ``Annotated`` type in earlier versions.
+
+However 3.8 is also supported via ``typing_extensions``. Note however, that MyPy with Python 3.8 will not accept
+``Annotated`` as a type to use with ``NewType``.

@@ -17,7 +17,7 @@ jobs:
     - uses: theCapypara/mypy-check@rust-support
       name: Run type checks
       with:
-        mypy_flags: '--config-file mypy.ini --junit-xml mypy.xml'
+        mypy_flags: '--config-file pyproject.toml --junit-xml mypy.xml'
         python_version: '${{ matrix.python-version }}'
     - name: Upload Unit Test Results
       if: always()
@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.9", "3.10" ]
+        python-version: [ "3.8", "3.9", "3.10" ]
     steps:
     - uses: actions/checkout@v2
       with:
@@ -95,10 +95,10 @@ jobs:
       - name: Note version
         run: |
           echo "PACKAGE_VERSION=$(python3 -- ./setup.py --version)" >> $GITHUB_ENV
-      - name: Set up Python 3.9
+      - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
-          python-version: 3.9
+          python-version: 3.8
       - name: Upgrade pip
         run: |
           python -m pip install --upgrade pip
@@ -122,10 +122,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: wheels
-      - name: Set up Python 3.9
+      - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
-          python-version: 3.9
+          python-version: 3.8
       - name: Upgrade pip
         run: |
           python -m pip install --upgrade pip

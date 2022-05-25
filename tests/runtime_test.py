@@ -1,5 +1,10 @@
 from itertools import chain
-from typing import Optional, NewType, Annotated
+from typing import NewType, Optional
+
+try:
+    from typing import Annotated  # type: ignore
+except ImportError:
+    from typing_extensions import Annotated  # type: ignore
 
 from range_typed_integers import get_range, u8, ValueRange, check_int, u8_checked, IntegerBoundError
 

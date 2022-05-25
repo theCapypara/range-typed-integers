@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-import functools
 import warnings
-from inspect import signature
-from typing import TypeVar, Type, Tuple, Union, get_type_hints, NewType, Optional, Any
+from typing import Type, Tuple, Union, Optional, Any
+try:
+    # We prefer this version since it has include_extras for sure.
+    from typing_extensions import get_type_hints  # type: ignore
+except ImportError:
+    from typing import get_type_hints  # type: ignore
 
 from range_typed_integers.types import *
 
@@ -101,7 +104,7 @@ def check_int(typ: Union[V, Tuple[object, str]], value: Any, *, suppress_warning
     """
     if isinstance(typ, tuple):
         try:
-            typ = get_type_hints(typ[0], include_extras=True)[typ[1]]
+            typ = get_type_hints(typ[0], include_extras=True)[typ[1]]  # type: ignore
         except IndexError as ex:
             if not suppress_warning_for_unresolved_hints:
                 warnings.warn(

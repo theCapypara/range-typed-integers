@@ -1,5 +1,10 @@
 from dataclasses import dataclass
-from typing import Annotated, NewType, Protocol, TypeVar, Generic
+from typing import NewType, Protocol, TypeVar, Generic
+
+try:
+    from typing import Annotated  # type: ignore
+except ImportError:
+    from typing_extensions import Annotated  # type: ignore
 
 
 class Comparable(Protocol):
