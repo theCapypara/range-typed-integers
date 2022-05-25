@@ -1,0 +1,58 @@
+[project]
+name = "range-typed-integers"
+version = "1.0.0"
+description = "Integer type aliases that specify valid value ranges."
+readme = "README.rst"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "Marco 'Capypara' Köpcke", email = "hello@capypara.de" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python"
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest", "tox"]
+
+[project.urls]
+repository = "https://github.com/theCapypara/range-typed-integers"
+
+
+[build-system]
+requires = ["setuptools >= 61.0.0"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools.package-data]
+range_typed_integers = ["py.typed"]
+
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py36,py37,py38,py39,py310
+skipsdist = {env:TOXBUILD:false}
+
+[gh-actions]
+python =
+    3.6: py36
+    3.7: py37
+    3.8: py38, mypy
+    3.9: py39
+    3.10: py310
+
+[testenv]
+commands =
+  pytest -n 3 --junitxml pytest.xml -W ignore::DeprecationWarning {posargs}
+deps =
+  pytest-xdist
+"""
