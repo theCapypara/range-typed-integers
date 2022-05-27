@@ -105,7 +105,7 @@ def check_int(typ: Union[V, Tuple[object, str]], value: Any, *, suppress_warning
     if isinstance(typ, tuple):
         try:
             typ = get_type_hints(typ[0], include_extras=True)[typ[1]]  # type: ignore
-        except IndexError as ex:
+        except (IndexError, KeyError) as ex:
             if not suppress_warning_for_unresolved_hints:
                 warnings.warn(
                     f"The type {typ[0]} does not have a type hint for {typ[1]}. "  # type: ignore

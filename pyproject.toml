@@ -1,6 +1,6 @@
 [project]
 name = "range-typed-integers"
-version = "1.0.0"
+version = "1.0.1"
 description = "Integer type aliases that specify valid value ranges."
 readme = "README.rst"
 requires-python = ">=3.8"
