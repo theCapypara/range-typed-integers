@@ -10,12 +10,12 @@ Usage
 The package provides some types (as `NewType`_) that represent their respective `Rust integer type`_:
 ``u8``, ``u16``, ``u32``, ``u64``, ``i8``, ``i16``, ``i32`` and ``i64``::
 
-    from range_typed_integers import u8, i8
+    from range_typed_integers import u8, u8_checked
 
     # u8 is an unsigned 8-bit integer so its range is 0-255:
-    a: u8 = 12  # valid
-    a: u8 = -12  # invalid - The type checker should mark this as an error.
-    a: u8 = 900  # invalid - The type checker should mark this as an error.
+    a: u8 = u8(12)  # valid
+    a: u8 = u8(-12)  # "valid" but illegal cast. The type checker and runtime will not error.
+    a: u8 = u8_checked(900)  # invalid - Will raise an error at runtime.
 
 The types are defined as ``NewTypes`` of ``ValueRange`` annotated integers. This is also how
 you can define your own custom ranged integer types. As an example this is literally how
